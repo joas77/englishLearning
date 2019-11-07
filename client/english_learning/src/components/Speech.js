@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import IconButton from '@material-ui/core/IconButton';
-//import  Mic from '@material-ui/icons/Mic';
-import { FaMicrophone } from "react-icons/fa";
+import  MicIcon from '@material-ui/icons/Mic';
+import * as cleanTextUtils from 'clean-text-utils';
 
 
 function Speech({expectedText}) {
@@ -38,6 +38,8 @@ function Speech({expectedText}) {
         toggleListen();
         //listening? recognition.start(): recognition.stop();
         console.log("DEBUG_MESSAGE: listening:" + listening);
+        console.log("DEBUG_MESSAGE: expected text = " + expectedText);
+        
         recognition.start();
         
         recognition.onresult = function (event) {
@@ -54,7 +56,11 @@ function Speech({expectedText}) {
             //let speechResult = event.results[0][0].transcript.toLowerCase();
             let speechResult = event.results[0][0].transcript;
             console.log("DEBUG_MSG: received text = " + speechResult);
-            console.log("DEBUG_MSG: expected text = " + expectedText);
+            console.log("DEBUG_MsSG: expected text = " + expectedText);
+            console.log("balfklsdfgklds");
+            let cleanText = cleanTextUtils.strip.punctuation(expectedText);
+            
+            console.log("DEBUG_MSG: cleaned text = "+ cleanText);
 
 
             if (expectedText.toLowerCase() === speechResult.toLowerCase()) {
@@ -79,7 +85,13 @@ function Speech({expectedText}) {
         
     return (
         <section>
-            <FaMicrophone onClick ={()=>listen(expectedText)} color={listening?"red":"white"} />
+            <IconButton
+                onClick ={()=>listen(expectedText)}
+                color={listening?'secondary':'primary'}
+                size='medium'
+            >
+                <MicIcon fontSize='large'/>
+            </IconButton>
             <p>Text received:</p>
             <p>{listenedText}</p>
             <p>{diagnostic}</p>

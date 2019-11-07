@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
-import Textfield from '@material-ui/core/TextField';
 import Speech from './Speech';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,9 +21,6 @@ const useStyles = makeStyles(theme => ({
 function TextComp(params) {
     const classes = useStyles();
     const [phrase, setPhrase] = useState("Type something or press RANDOM SEARCH button");
-
-    useEffect(()=>{ console.log("updating component");
-       });
 
     function setRandomQuote(){
 

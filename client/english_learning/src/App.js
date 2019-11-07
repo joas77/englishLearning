@@ -5,7 +5,7 @@ import TextComp from './components/TextComp';
 function App() {
 
   return (
-    <div className="App">
+    <div className="_App">
       <TextComp/>
     </div>
   );
